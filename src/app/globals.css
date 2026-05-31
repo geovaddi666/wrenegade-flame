@@ -724,6 +724,38 @@ a.contact-item:hover {
     box-shadow: 0 0 30px var(--accent-glow);
 }
 
+.submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.instagram-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 2rem;
+}
+
+.instagram-icon {
+    flex-shrink: 0;
+}
+
+.form-message {
+    margin-top: 0.4rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.form-success {
+    color: var(--ember-bright);
+}
+
+.form-error {
+    color: #ff8a6b;
+}
+
 /* Footer */
 .footer {
     background: var(--darker-bg);
