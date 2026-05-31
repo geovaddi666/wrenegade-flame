@@ -426,16 +426,11 @@ body {
     border: 1px solid rgba(226, 89, 43, 0.12);
 }
 
-.gallery-thumb {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-}
-
 .gallery-item img {
     width: 100%;
+    height: auto;
     display: block;
-    object-fit: cover;
+    margin: 0 auto;
     transition: transform 0.6s ease, filter 0.4s ease;
     filter: grayscale(0.15) brightness(0.92);
 }
@@ -456,6 +451,27 @@ body {
 
 .gallery-item:hover::after {
     opacity: 1;
+}
+
+.gallery-item-reveal {
+    animation: gallery-reveal 0.5s ease both;
+}
+
+@keyframes gallery-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
 }
 
 .lightbox-overlay {
