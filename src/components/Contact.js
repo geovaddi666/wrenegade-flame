@@ -18,9 +18,9 @@ export default function Contact() {
               and what you have in mind.
             </p>
             <div className="contact-details">
-              <a className="contact-item" href="mailto:hello@example.com">
+              <a className="contact-item" href="mailto:flame@wrenegade.co.uk">
                 <span className="contact-icon">&#9993;</span>
-                <span>hello@example.com</span>
+                <span>flame@wrenegade.co.uk</span>
               </a>
               <a className="contact-item" href="tel:+447522051049">
                 <span className="contact-icon">&#9742;</span>
