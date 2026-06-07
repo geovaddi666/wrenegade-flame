@@ -941,6 +941,45 @@ a.contact-item:hover {
 
 .em-nav-back:hover { color: var(--em-purple-soft); }
 
+.em-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.em-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.em-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.em-hamburger-bar {
+    width: 26px;
+    height: 2px;
+    background: var(--em-gold);
+    transition: 0.3s;
+}
+
+.em-hamburger-open .em-hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.em-hamburger-open .em-hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.em-hamburger-open .em-hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 .em-footer {
     border-top: 1px solid var(--em-border);
     padding: 2.4rem 0;
@@ -1618,6 +1657,40 @@ a.contact-item:hover {
 @media (max-width: 560px) {
   .product-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .em-nav-inner {
+    position: relative;
+  }
+
+  .em-nav-toggle {
+    display: flex;
+  }
+
+  .em-nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.6rem 0;
+    background: linear-gradient(180deg, rgba(8, 4, 20, 0.98) 0%, rgba(15, 8, 35, 0.96) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--em-border);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .em-nav-links-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 }
 
