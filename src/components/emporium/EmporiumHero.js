@@ -8,7 +8,7 @@ export default function EmporiumHero() {
         <p className="emporium-eyebrow">Emporium Alchymia</p>
         <h1 className="emporium-hero-title">Creations of<br />Transmutation</h1>
         <p className="emporium-hero-subtitle">
-          Each piece made once. Carrying the trace of its making.
+          Each piece unique. Never to be made again.
         </p>
         <div className="emporium-hero-divider">
           <span className="emporium-divider-line" />
@@ -16,9 +16,8 @@ export default function EmporiumHero() {
           <span className="emporium-divider-line" />
         </div>
         <p className="emporium-hero-body">
-          These are not products. They are residue of a process —
-          artefacts conjured through craft, intention, and the alchemy of making.
-          Take what calls to you.
+          These are not just objects. They are products of alchemy.
+          Proof of transmutation.
         </p>
       </div>
     </section>

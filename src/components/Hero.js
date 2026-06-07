@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -53,9 +54,14 @@ export default function Hero() {
         <p className="hero-subtitle">
           Movement meditation with fire &mdash; channelled flow, trance, and flame.
         </p>
-        <a href="#contact" className="cta-button">
-          Book a Performance
-        </a>
+        <div className="hero-cta-group">
+          <a href="#contact" className="cta-button">
+            Book a Performance
+          </a>
+          <Link href="/emporium" className="cta-button">
+            Emporium Alchymia
+          </Link>
+        </div>
       </div>
       <div className="hero-image">
         <Image

@@ -6,7 +6,7 @@ export default function ProductGrid({ products }) {
       <div className="emporium-container">
         <h2 className="emporium-section-title">The Collection</h2>
         <p className="emporium-section-subtitle">
-          Each creation exists once. When it finds its person, it is gone.
+          Artifacts of Alchemy; Creative Conjurings
         </p>
         <div className="product-grid">
           {products.map((product) => (
