@@ -90,6 +90,45 @@ Hang it in a place of importance where you can contemplate it fully.`,
     category: 'leather',
     inStock: true,
   },
+  {
+    id: 'spiral-keeper',
+    name: "The Spiral Keeper",
+    subtitle: 'Hand-Stitched Leather Shoulder Bag',
+    price: 120,
+    priceDisplay: '£120',
+    images: [
+      '/emporium/spiral-keeper-1.jpg',
+      '/emporium/spiral-keeper-2.jpg',
+      '/emporium/spiral-keeper-3.jpg',
+      '/emporium/spiral-keeper-4.jpg',
+    ],
+    shortDescription: 'A companion for life. It wants your name.',
+    description: `This bag has never been used. It has been waiting.
+
+Built from recycled leather — warm tan and rich earth brown, layered and stitched by hand over at least ten hours of focused work. The spiral sigil on the front flap is hand-stitched in matching thread, freehand, drawn directly onto the leather and followed stitch by stitch into existence. No template. No shortcuts. No effort left unexpended.
+
+The spiral is one of the oldest symbols humanity has ever carved into stone. It appears at Newgrange, at Achnabreck, across the ancient Celtic and pre-Celtic world. It means many things. It can mean the journey inward and outward simultaneously. It can mean the universe remembering itself. What does it mean to you?
+
+It is enchanted both with sigil magic and also in the way that creations made with complete presence are enchanted — not through ritual performance, but through the channelled awareness given to its making and the transmutation of its being. I truly had no idea how this was going to turn out.
+
+One compartment. A shoulder strap waiting to be worn in. Made from leather offcuts ready to be thrown away by an industrial sofa company.
+
+To me this is a fae object — but that is just my interpretation. The person it chooses will know its name and where it comes from.`,
+    details: [
+      'Hand-stitched recycled leather',
+      'Salvaged from industrial sofa offcuts',
+      'Warm tan and earth brown layered construction',
+      'Freehand spiral sigil in matching thread',
+      'Single main compartment',
+      'Leather shoulder strap',
+      'Never used',
+      'Enchanted — one of a kind',
+      'Minimum 10 hours of hand work',
+    ],
+    callToAction: 'This bag is waiting for its person. Is that you?',
+    category: 'leather',
+    inStock: true,
+  },
 ];
 
 export function getProductById(id) {
