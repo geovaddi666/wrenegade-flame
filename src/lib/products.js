@@ -129,6 +129,44 @@ To me this is a fae object — but that is just my interpretation. The person it
     category: 'leather',
     inStock: true,
   },
+  {
+    id: 'duality-stave',
+    name: "The Duality Stave",
+    subtitle: 'Single Contact Flow Staff — 150cm',
+    price: 120,
+    priceDisplay: '£120',
+    images: [
+      '/emporium/duality-stave-1.jpg',
+      '/emporium/duality-stave-2.jpg',
+      '/emporium/duality-stave-3.jpg',
+    ],
+    shortDescription: 'Light and dark in permanent conversation.',
+    description: `This is not a spinning staff. This is a contact staff.
+
+Built for the slower, more deliberate art of contact flow — tracing spirals through space with grace. It rewards presence. It punishes rush.
+
+The diamond braid spirals navy and cream the full length of the shaft — perforated black leather against bone white, two forces in permanent conversation. In motion the contrast creates a visual effect that is hypnotic. Light chasing dark chasing light.
+
+At 150cm with a 3mm wall thickness, this stave carries more weight than a standard spinning staff. That weight is the point. It grounds the movement, demands commitment, teaches patience. It is also built for martial arts practice — the grip holds under force, the collar joints are solid, the balance is deliberate.
+
+Grade 6082 aluminium. 100% Kevlar wicks. Leather collar joints. Every detail made by hand.
+
+There is only one. It will not be made again.`,
+    details: [
+      'Grade 6082 aluminium shaft',
+      '3mm wall thickness — weighted for contact',
+      '150cm length',
+      'Hand-braided leather diamond wrap',
+      'Navy and cream perforated leather',
+      'Leather collar joints',
+      '100% pure kevlar wicks',
+      'Suited to contact flow and martial arts styles',
+      'One of a kind — will not be remade',
+    ],
+    callToAction: 'One staff. One conversation between light and dark. Is it yours?',
+    category: 'fire',
+    inStock: true,
+  },
 ];
 
 export function getProductById(id) {
