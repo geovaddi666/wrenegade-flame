@@ -5,6 +5,7 @@ export const products = [
     subtitle: 'Dual Fire Staves — 90cm',
     price: 250,
     priceDisplay: '£250',
+    stripePrice: 'price_1TgNCM1OpzhHEqRBtWQJFPIy',
     images: [
       '/emporium/fools-sceptres-1.jpg',
       '/emporium/fools-sceptres-2.jpg',
@@ -38,6 +39,7 @@ My guarantee is that the wrap will outlast the kevlar.`,
     subtitle: 'Hand-Stitched Leather Herb Pouch',
     price: 50,
     priceDisplay: '£50',
+    stripePrice: 'price_1TgNBl1OpzhHEqRBEBXKOeYb',
     images: [
       '/emporium/alchemists-key-1.jpg',
       '/emporium/alchemists-key-2.jpg',
@@ -67,6 +69,7 @@ This has been used as my personal pouch and has been kept in excellent condition
     subtitle: 'Hand-Stitched Leather Sigil',
     price: 80,
     priceDisplay: '£80',
+    stripePrice: 'price_1TgNEb1OpzhHEqRBkwJqFsTs',
     images: [
       '/emporium/triquetra-1.jpg',
       '/emporium/triquetra-2.jpg',
@@ -96,6 +99,7 @@ Hang it in a place of importance where you can contemplate it fully.`,
     subtitle: 'Hand-Stitched Leather Shoulder Bag',
     price: 120,
     priceDisplay: '£120',
+    stripePrice: 'price_1TgNDp1OpzhHEqRBZWTmeuok',
     images: [
       '/emporium/spiral-keeper-1.jpg',
       '/emporium/spiral-keeper-2.jpg',
@@ -135,6 +139,7 @@ To me this is a fae object — but that is just my interpretation. The person it
     subtitle: 'Single Contact Flow Staff — 150cm',
     price: 120,
     priceDisplay: '£120',
+    stripePrice: 'price_1TgNFe1OpzhHEqRBaTyO0oxU',
     images: [
       '/emporium/duality-stave-1.jpg',
       '/emporium/duality-stave-2.jpg',
@@ -164,6 +169,47 @@ There is only one. It will not be made again.`,
       'One of a kind — will not be remade',
     ],
     callToAction: 'One staff. One conversation between light and dark. Is it yours?',
+    category: 'fire',
+    inStock: true,
+  },
+  {
+    id: 'earth-keeper',
+    name: "The Earth Keeper",
+    subtitle: 'Single Fire Staff — 150cm',
+    price: 100,
+    priceDisplay: '£100',
+    stripePrice: 'price_1TgNLq1OpzhHEqRB57Siqqlp',
+    images: [
+      '/emporium/earth-keeper-1.jpg',
+      '/emporium/earth-keeper-2.jpg',
+      '/emporium/earth-keeper-3.jpg',
+      '/emporium/earth-keeper-4.jpg',
+    ],
+    shortDescription: 'Grounded. Versatile. Built to last a lifetime.',
+    description: `Some staffs are built for a single purpose. This one is not.
+
+The Earth Keeper is the all-rounder of the collection — lighter than the Duality Stave, designed primarily for spinning but more than capable of contact work and martial arts practice. The thick leather wrap gives it a grip that holds under any style, any speed.
+
+Dark chestnut brown leather braided the full length of the shaft — this staff is a reminder of times gone by. It has a medieval aesthetic and feels like a relic of the past. Deep, grounded warm earth tones.
+
+This staff is reliable, versatile and beautiful. It feels alive and it wants its own name. A perfect companion in the art of flow.
+
+At 2mm wall thickness it sits in the lighter series — responsive, fast when you want it fast, steady when you need it steady. Grade 6082 aluminium, solid wood dowels, 100% pure kevlar wicks. Grip built to outlast the wick.
+
+Unique design. It will not be made again.`,
+    details: [
+      'Grade 6082 aluminium shaft',
+      '150cm length',
+      '2mm wall thickness — lighter series, designed for spinning',
+      'Thick leather wrap for superior grip',
+      'Capable of contact flow and martial arts',
+      'Hand-braided chestnut brown leather',
+      'Medieval aesthetic',
+      'Solid wood dowels',
+      '100% pure kevlar wicks',
+      'One of a kind — will not be remade',
+    ],
+    callToAction: 'Versatile. Responsive. Ready for action.',
     category: 'fire',
     inStock: true,
   },

@@ -21,17 +21,7 @@ export async function POST(request) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'gbp',
-            product_data: {
-              name: product.name,
-              description: product.subtitle,
-              images: product.images.map(
-                (img) => `${process.env.NEXT_PUBLIC_SITE_URL}${img}`
-              ),
-            },
-            unit_amount: product.price * 100,
-          },
+          price: product.stripePrice,
           quantity: 1,
         },
       ],
