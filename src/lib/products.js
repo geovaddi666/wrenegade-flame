@@ -178,7 +178,7 @@ There is only one. It will not be made again.`,
     subtitle: 'Single Fire Staff — 150cm',
     price: 100,
     priceDisplay: '£100',
-    stripePrice: 'price_1TgNLq1OpzhHEqRB57Siqqlp',
+    stripePrice: 'price_1TgNwx1OpzhHEqRB9eJcRFCX',
     images: [
       '/emporium/earth-keeper-1.jpg',
       '/emporium/earth-keeper-2.jpg',
