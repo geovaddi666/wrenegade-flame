@@ -1694,3 +1694,144 @@ a.contact-item:hover {
   }
 }
 
+/* ── Archive ─────────────────────────────────────────── */
+
+.archive-hero {
+  text-align: center;
+  padding: clamp(6rem, 12vw, 10rem) 24px clamp(3rem, 6vw, 5rem);
+  position: relative;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 0 5rem;
+}
+
+.archive-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  border: 1px solid var(--em-border);
+  transition: border-color 0.3s ease;
+}
+
+.archive-card:hover {
+  border-color: var(--em-gold);
+}
+
+.archive-card-image {
+  position: absolute;
+  inset: 0;
+}
+
+.archive-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 4, 20, 0.92) 0%,
+    rgba(8, 4, 20, 0.3) 50%,
+    transparent 100%
+  );
+  transition: background 0.3s ease;
+}
+
+.archive-card:hover .archive-card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(8, 4, 20, 0.85) 0%,
+    rgba(8, 4, 20, 0.45) 60%,
+    rgba(8, 4, 20, 0.1) 100%
+  );
+}
+
+.archive-card-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem 1rem;
+  font-family: var(--heading-font);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--em-text);
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.archive-card:hover .archive-card-name {
+  color: var(--em-gold);
+}
+
+.archive-found-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--heading-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--em-text-muted);
+  border: 1px solid var(--em-border);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.archive-found-glyph {
+  color: var(--em-gold);
+  font-size: 0.6rem;
+}
+
+.archive-review {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.archive-review-glyph {
+  color: var(--em-gold);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.archive-review-text {
+  font-family: var(--body-font);
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.85;
+  color: var(--em-text);
+  margin-bottom: 0.8rem;
+}
+
+.archive-review-author {
+  font-family: var(--heading-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--em-gold);
+}
+
+.archive-empty {
+  text-align: center;
+  padding: 6rem 24px;
+  font-style: italic;
+  color: var(--em-text-muted);
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .archive-grid {
+    grid-template-columns: 1fr;
+  }
+}

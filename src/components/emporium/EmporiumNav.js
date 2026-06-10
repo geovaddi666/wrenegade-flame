@@ -43,6 +43,9 @@ export default function EmporiumNav() {
           <Link href="/emporium/about" className="em-nav-back" onClick={close}>
             About
           </Link>
+          <Link href="/emporium/archive" className="em-nav-back" onClick={close}>
+            Archive
+          </Link>
           <Link href="/" className="em-nav-back" onClick={close}>
             Wrenegade Flame ↗
           </Link>
