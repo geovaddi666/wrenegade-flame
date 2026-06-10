@@ -9,6 +9,8 @@ export const products = [
     images: [
       '/emporium/fools-sceptres-1.jpg',
       '/emporium/fools-sceptres-2.jpg',
+      '/emporium/fools-sceptres-3.jpg',
+      '/emporium/fools-sceptres-4.jpg',
     ],
     shortDescription: 'Throw them. Spin them. Be ridiculous. Be brilliant.',
     description: `These staves want play. They want to be airborne, caught behind your back, isolated and taken on a journey with a clown who loves fire. The Fool doesn't perform precision — the Fool performs aliveness.
@@ -43,6 +45,7 @@ My guarantee is that the wrap will outlast the kevlar.`,
     images: [
       '/emporium/alchemists-key-1.jpg',
       '/emporium/alchemists-key-2.jpg',
+      '/emporium/alchemists-key-3.jpg',
     ],
     shortDescription: 'One sigil. One key. Infinite doors.',
     description: `A companion for consciousness explorers, this pouch is made with intent. The key sigil worked into its face is not ornament — it is purpose made visible. Plant based substances have been humanity's oldest companions in the work of self-exploration. Like the key, they open the door but only you can decide to walk through.
@@ -144,6 +147,7 @@ To me this is a fae object — but that is just my interpretation. The person it
       '/emporium/duality-stave-1.jpg',
       '/emporium/duality-stave-2.jpg',
       '/emporium/duality-stave-3.jpg',
+      '/emporium/duality-stave-4.jpg',
     ],
     shortDescription: 'Light and dark in permanent conversation.',
     description: `This is not a spinning staff. This is a contact staff.
