@@ -15,9 +15,9 @@ export async function getProductsWithStatus() {
   );
   return products.map((product, i) => ({
     ...product,
-    archived: statuses[i].archived || false,
+    archived: statuses[i].archived || product.archived || false,
     review: statuses[i].review || null,
-    inStock: !statuses[i].archived,
+    inStock: !(statuses[i].archived || product.archived),
   }));
 }
 

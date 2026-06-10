@@ -244,6 +244,7 @@ Unique design. It will not be made again.`,
     callToAction: 'Some artefacts are purchased. Others arrive through exchange. This one found its keeper long ago.',
     category: 'leather',
     inStock: false,
+    archived: true,
   },
 ];
 

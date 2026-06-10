@@ -15,7 +15,7 @@ export default function EmporiumPage() {
       <EmporiumHero />
       <section className="emporium-lower">
         <EmporiumParticles className="emporium-lower-particles" />
-        <ProductGrid products={products} />
+        <ProductGrid products={products.filter((p) => !p.archived)} />
       </section>
     </main>
   );
