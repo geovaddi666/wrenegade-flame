@@ -9,6 +9,12 @@ export default function EmporiumAboutPage() {
     <main className="emporium-page emporium-about-page">
       <article className="emporium-about">
         <p className="emporium-eyebrow">Emporium Alchymia</p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/emporium/meet-the-alcymist.jpg"
+          alt="Meet the Alchymist"
+          className="emporium-about-hero-image"
+        />
         <p className="emporium-about-subtitle">About the Work</p>
 
         <hr className="product-detail-divider" />

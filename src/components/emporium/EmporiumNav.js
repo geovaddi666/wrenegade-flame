@@ -38,7 +38,7 @@ export default function EmporiumNav() {
 
         <div className={isOpen ? 'em-nav-links em-nav-links-open' : 'em-nav-links'}>
           <Link href="/emporium" className="em-nav-back" onClick={close}>
-            Home
+            Emporium
           </Link>
           <Link href="/emporium/about" className="em-nav-back" onClick={close}>
             About

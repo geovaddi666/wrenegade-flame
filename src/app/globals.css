@@ -1609,6 +1609,13 @@ a.contact-item:hover {
   color: var(--em-text-muted);
   margin-top: -1rem;
 }
+.emporium-about-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.5rem 0;
+  border: 1px solid var(--em-border);
+}
 .emporium-about-section {
   text-align: left;
 }
