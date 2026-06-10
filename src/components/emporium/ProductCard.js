@@ -43,7 +43,7 @@ export default function ProductCard({ product }) {
         </div>
         <p className="product-card-desc">{product.shortDescription}</p>
         <Link href={`/emporium/${product.id}`} className="product-card-link">
-          Behold the Creation
+          Behold the Artifact
           <span className="product-card-arrow">→</span>
         </Link>
       </div>

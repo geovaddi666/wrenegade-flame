@@ -113,7 +113,7 @@ Built from recycled leather — warm tan and rich earth brown, layered and stitc
 
 The spiral is one of the oldest symbols humanity has ever carved into stone. It appears at Newgrange, at Achnabreck, across the ancient Celtic and pre-Celtic world. It means many things. It can mean the journey inward and outward simultaneously. It can mean the universe remembering itself. What does it mean to you?
 
-It is enchanted both with sigil magic and also in the way that creations made with complete presence are enchanted — not through ritual performance, but through the channelled awareness given to its making and the transmutation of its being. I truly had no idea how this was going to turn out.
+It is enchanted both with sigil magic and also in the way that artifacts made with complete presence are enchanted — not through ritual performance, but through the channelled awareness given to its making and the transmutation of its being. I truly had no idea how this was going to turn out.
 
 One compartment. A shoulder strap waiting to be worn in. Made from leather offcuts ready to be thrown away by an industrial sofa company.
 

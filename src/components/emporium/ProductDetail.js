@@ -94,8 +94,8 @@ export default function ProductDetail({ product }) {
               {purchasing
                 ? 'Opening the portal...'
                 : product.inStock
-                ? 'Acquire this Creation'
-                : 'This Creation has found its person'}
+                ? 'Acquire this Artifact'
+                : 'This Artifact has found its person'}
             </button>
             <p className="product-detail-note">
               Handmade in Devon. Ships within 3–5 days. Questions?{' '}

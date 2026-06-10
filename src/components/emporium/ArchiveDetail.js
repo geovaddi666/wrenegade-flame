@@ -52,7 +52,7 @@ export default function ArchiveDetail({ product }) {
 
             <div className="archive-found-badge">
               <span className="archive-found-glyph">✦</span>
-              <span>This creation has found its person</span>
+              <span>This artifact has found its person</span>
             </div>
 
             <div className="product-detail-divider" />

@@ -16,7 +16,7 @@ export default function EmporiumTermsPage() {
         <section className="emporium-about-section">
           <h2 className="emporium-about-heading">The nature of the goods</h2>
           <p className="emporium-about-body">
-            All items sold through Emporium Alchymia are handmade, one-of-a-kind creations. Each piece is unique and exactly as described and photographed. Due to the handmade nature of the work, minor natural variations in leather texture, colour, and stitching are to be expected and are part of what makes each piece distinctive.
+            All items sold through Emporium Alchymia are handmade, one-of-a-kind artifacts. Each piece is unique and exactly as described and photographed. Due to the handmade nature of the work, minor natural variations in leather texture, colour, and stitching are to be expected and are part of what makes each piece distinctive.
           </p>
         </section>
 

@@ -16,7 +16,7 @@ export default async function ArchivePage() {
         <p className="emporium-eyebrow">Emporium Alchymia</p>
         <h1 className="emporium-hero-title">The Archive</h1>
         <p className="emporium-hero-subtitle">
-          These creations have found their person.
+          These artifacts have found their person.
         </p>
         <div className="emporium-hero-divider">
           <span className="emporium-divider-line" />
@@ -31,7 +31,7 @@ export default async function ArchivePage() {
       <section className="emporium-lower">
         {archived.length === 0 ? (
           <div className="archive-empty">
-            <p>The archive is empty. All creations are still seeking their person.</p>
+            <p>The archive is empty. All artifacts are still seeking their person.</p>
           </div>
         ) : (
           <ArchiveGallery products={archived} />

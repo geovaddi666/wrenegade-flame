@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'The creation is yours | Emporium Alchymia',
+  title: 'The artifact is yours | Emporium Alchymia',
 };
 
 export default function SuccessPage() {
@@ -10,7 +10,7 @@ export default function SuccessPage() {
       <div className="emporium-container emporium-success-content">
         <p className="emporium-eyebrow">Emporium Alchymia</p>
         <div className="emporium-success-glyph">✦</div>
-        <h1 className="emporium-success-title">The creation is yours.</h1>
+        <h1 className="emporium-success-title">The artifact is yours.</h1>
         <p className="emporium-success-body">
           A confirmation has been sent to your email. Your piece will be
           carefully packaged and dispatched within 3–5 days.

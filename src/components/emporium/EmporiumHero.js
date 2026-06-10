@@ -6,7 +6,7 @@ export default function EmporiumHero() {
       <EmporiumParticles />
       <div className="emporium-hero-content">
         <p className="emporium-eyebrow">Emporium Alchymia</p>
-        <h1 className="emporium-hero-title">Creations of<br />Transmutation</h1>
+        <h1 className="emporium-hero-title">Artifacts of<br />Transmutation</h1>
         <p className="emporium-hero-subtitle">
           Each piece unique. Never to be made again.
         </p>
