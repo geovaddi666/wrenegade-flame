@@ -106,21 +106,15 @@ export default function Navbar() {
             </li>
           ))}
           <li className="navbar-item">
-            <Link href="/" className="navbar-link" onClick={() => setIsOpen(false)}>
-              Portal
-            </Link>
-          </li>
-          <li className="navbar-item">
             <Link
-              href="/emporium"
-              className={
-                pathname.startsWith('/emporium')
-                  ? 'navbar-link navbar-emporium-link navbar-emporium-active'
-                  : 'navbar-link navbar-emporium-link'
-              }
+              href="/"
+              className="nav-portal-link"
+              aria-label="Return to the portal"
+              title="Return to the portal"
               onClick={() => setIsOpen(false)}
             >
-              Emporium
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/portal/portal-icon.webp" alt="" width={44} height={44} />
             </Link>
           </li>
         </ul>

@@ -46,8 +46,15 @@ export default function EmporiumNav() {
           <Link href="/emporium/archive" className="em-nav-back" onClick={close}>
             Archive
           </Link>
-          <Link href="/" className="em-nav-back" onClick={close}>
-            Portal
+          <Link
+            href="/"
+            className="nav-portal-link"
+            aria-label="Return to the portal"
+            title="Return to the portal"
+            onClick={close}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/portal/portal-icon.webp" alt="" width={44} height={44} />
           </Link>
         </div>
       </div>

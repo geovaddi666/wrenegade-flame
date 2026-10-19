@@ -1910,3 +1910,38 @@ a.contact-item:hover {
   .photo-arrow { transition: none; }
   .photo-arrow:hover { transform: none; }
 }
+
+/* Portal icon: the way back to the homepage, in both the Flame and Emporium navbars */
+.nav-portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  line-height: 0;
+}
+.nav-portal-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(143, 188, 198, 0.25));
+  transition: transform 0.9s cubic-bezier(0.22, 0.9, 0.3, 1), filter 0.5s ease;
+}
+.nav-portal-link:hover img,
+.nav-portal-link:focus-visible img {
+  transform: rotate(-40deg) scale(1.08);
+  filter: drop-shadow(0 0 12px rgba(143, 188, 198, 0.6)) brightness(1.1);
+}
+.nav-portal-link:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 3px;
+}
+@media (max-width: 768px) {
+  .nav-portal-link { width: 52px; height: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-portal-link img { transition: filter 0.3s ease; }
+  .nav-portal-link:hover img,
+  .nav-portal-link:focus-visible img { transform: none; }
+}
