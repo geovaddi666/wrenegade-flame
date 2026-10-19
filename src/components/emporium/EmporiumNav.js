@@ -47,7 +47,7 @@ export default function EmporiumNav() {
             Archive
           </Link>
           <Link href="/" className="em-nav-back" onClick={close}>
-            Wrenegade Flame ↗
+            Portal
           </Link>
         </div>
       </div>

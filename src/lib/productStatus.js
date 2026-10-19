@@ -27,6 +27,8 @@ export async function getProductsWithStatusSafe() {
   try {
     return await getProductsWithStatus();
   } catch (err) {
+    // Let Next.js's own "render this page live" signal pass through.
+    if (err?.digest === 'DYNAMIC_SERVER_USAGE') throw err;
     console.error('Redis unavailable, using static product status:', err);
     return products.map((product) => ({
       ...product,

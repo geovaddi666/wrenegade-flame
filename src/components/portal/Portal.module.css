@@ -1,0 +1,245 @@
+/* The portal: one full-screen stage; three spiral glyphs in a triangle around
+   the background's cosmic orb, each turning on its own axis. */
+
+.stage {
+  --void: #0a0813;
+  --ink: #f2ecff;
+  --mist: #8fbcc6;
+  --c-fire: #ff6a2a;
+  --c-flow: #2fd2e8;
+  --c-emp: #e0b35a;
+  --display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --body: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background on its own layer so it can breathe with a very slow drift. */
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--void) url('/portal/bg-wide.webp') center / cover no-repeat;
+  transform: scale(1.04);
+  animation: drift 48s ease-in-out infinite alternate;
+}
+/* Soft vignette pulls the eye inward. */
+.stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 72% 68% at 50% 48%,
+    transparent 42%, rgba(6, 5, 12, 0.45) 78%, rgba(5, 4, 10, 0.82) 100%);
+}
+@keyframes drift {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.11); }
+}
+
+/* ---- Doors ---- */
+.door {
+  position: absolute;
+  z-index: 3;
+  left: var(--gx);
+  top: var(--gy);
+  width: var(--size);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.3, 1), filter 0.55s ease, opacity 0.55s ease;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.door:focus-visible { outline: none; }
+.door:focus-visible .spin {
+  outline: 2px solid var(--ink);
+  outline-offset: 8px;
+  border-radius: 50%;
+}
+
+/* Breathing glow in the door's own colour, behind the mark. */
+.aura {
+  position: absolute;
+  inset: -14%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--glow) 55%, transparent) 0%,
+    color-mix(in srgb, var(--glow) 18%, transparent) 42%,
+    transparent 68%);
+  opacity: 0.42;
+  filter: blur(2px);
+  animation: pulse 6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.97); }
+  50% { opacity: 0.52; transform: scale(1.04); }
+}
+
+/* Rotated by script; kept apart from the hover scale on .door so they never fight. */
+.spin {
+  position: relative;
+  z-index: 1;
+  display: block;
+  will-change: transform;
+}
+.spin img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--glow) 40%, transparent));
+  transition: filter 0.55s ease;
+}
+
+.label {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 0.5em);
+  transform: translateX(-50%);
+  z-index: 2;
+  white-space: nowrap;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(0.72rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.46;
+  text-shadow: 0 0 6px rgba(10, 8, 19, 0.95), 0 0 14px rgba(10, 8, 19, 0.8),
+    0 0 14px color-mix(in srgb, var(--glow) 35%, transparent);
+  transition: opacity 0.45s ease, letter-spacing 0.55s ease;
+  pointer-events: none;
+}
+
+/* Approach: the door leans toward the viewer and its name ignites. */
+.door:hover,
+.door:focus-visible {
+  transform: translate(-50%, -50%) scale(1.09);
+}
+.door:hover .aura,
+.door:focus-visible .aura {
+  opacity: 0.72;
+  animation-duration: 3.4s;
+}
+.door:hover .spin img,
+.door:focus-visible .spin img {
+  filter: drop-shadow(0 0 30px color-mix(in srgb, var(--glow) 70%, transparent));
+}
+.door:hover .label,
+.door:focus-visible .label {
+  opacity: 1;
+  letter-spacing: 0.3em;
+}
+
+/* Passing through: the chosen door blooms, the others recede. */
+.door.entering {
+  transform: translate(-50%, -50%) scale(1.22);
+  filter: brightness(1.3);
+}
+.leaving .door:not(.entering) {
+  opacity: 0.25;
+  transform: translate(-50%, -50%) scale(0.92);
+}
+
+/* ---- Welcome, in the heart of the triangle ---- */
+.welcome {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 55%; /* optically centred in the triangle */
+  transform: translate(-50%, -50%);
+  width: min(92vw, 30rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55em;
+  pointer-events: none;
+}
+.welcomeTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.3vw, 1.65rem);
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: var(--ink);
+  text-shadow: 0 0 18px rgba(10, 8, 19, 0.9), 0 0 28px rgba(224, 179, 90, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.hint {
+  margin: 0;
+  font-family: var(--body);
+  font-style: italic;
+  font-size: clamp(0.8rem, 1.5vw, 0.98rem);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--mist) 70%, white);
+  opacity: 0.85;
+  text-shadow: 0 0 12px rgba(10, 8, 19, 0.95), 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.hint b {
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Drifting embers for ambient life. */
+.ember {
+  position: absolute;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 180, 120, 0.9), rgba(255, 120, 60, 0));
+  opacity: 0;
+  animation: rise linear infinite;
+}
+@keyframes rise {
+  0% { opacity: 0; transform: translateY(12vh) scale(0.6); }
+  12% { opacity: 0.8; }
+  88% { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-16vh) scale(1.1); }
+}
+
+/* ---- Triangle geometry ---- */
+.emporium { --gx: 50%; --gy: 31%; --size: clamp(130px, min(23vw, 36vh), 300px); --glow: var(--c-emp); }
+.fire { --gx: 29%; --gy: 66%; --size: clamp(120px, min(21vw, 33vh), 280px); --glow: var(--c-fire); }
+.flow { --gx: 71%; --gy: 66%; --size: clamp(120px, min(21vw, 33vh), 280px); --glow: var(--c-flow); }
+
+/* Emporium's name sits above its glyph; Flame and Flow below theirs. */
+.emporium .label {
+  top: auto;
+  bottom: calc(100% + 0.5em);
+}
+
+/* Portrait / phone: the tall background and a taller triangle. */
+@media (max-width: 680px) {
+  .stage::before { background-image: url('/portal/bg-phone.webp'); }
+  .stage::after {
+    background: radial-gradient(ellipse 86% 60% at 50% 42%,
+      transparent 38%, rgba(6, 5, 12, 0.5) 80%, rgba(5, 4, 10, 0.85) 100%);
+  }
+  .emporium { --gy: 17%; --size: clamp(140px, 42vw, 240px); }
+  .fire { --gx: 28%; --gy: 71%; --size: clamp(120px, 35vw, 210px); }
+  .flow { --gx: 72%; --gy: 71%; --size: clamp(120px, 35vw, 210px); }
+  .welcome { top: 50%; }
+  /* On phones Emporium's name goes back beneath its glyph. */
+  .emporium .label { top: calc(100% + 0.5em); bottom: auto; }
+  .ember:nth-of-type(n + 8) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage::before { animation: none; }
+  .aura { animation: none; opacity: 0.42; }
+  .ember { display: none; }
+  .door { transition: filter 0.3s ease, opacity 0.3s ease; }
+}

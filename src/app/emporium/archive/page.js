@@ -1,6 +1,9 @@
 import { getProductsWithStatusSafe } from '@/lib/productStatus';
 import ArchiveGallery from '@/components/emporium/ArchiveGallery';
 
+// Always read live sold status from Redis.
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'The Archive | Emporium Alchymia',
   description: 'Artefacts that have found their person. Each piece remembered.',

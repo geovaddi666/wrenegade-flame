@@ -17,7 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === '/flame';
 
   useEffect(() => {
     if (!isHomePage) {
@@ -59,7 +59,7 @@ export default function Navbar() {
     <nav className={scrolled ? 'navbar navbar-scrolled' : 'navbar'}>
       <div className="navbar-container">
         <a
-          href={isHomePage ? '#home' : '/'}
+          href={isHomePage ? '#home' : '/flame'}
           className="navbar-logo"
           onClick={(e) => isHomePage && handleLinkClick(e, 'home')}
         >
@@ -96,7 +96,7 @@ export default function Navbar() {
                 </a>
               ) : (
                 <Link
-                  href={`/#${link.id}`}
+                  href={`/flame#${link.id}`}
                   className="navbar-link"
                   onClick={() => setIsOpen(false)}
                 >
@@ -105,6 +105,11 @@ export default function Navbar() {
               )}
             </li>
           ))}
+          <li className="navbar-item">
+            <Link href="/" className="navbar-link" onClick={() => setIsOpen(false)}>
+              Portal
+            </Link>
+          </li>
           <li className="navbar-item">
             <Link
               href="/emporium"

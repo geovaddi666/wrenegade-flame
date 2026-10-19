@@ -1,10 +1,9 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: "Wrenegade Flame | Fire Performer",
+  title: "Wrenegade | Flame · Flow · Emporium",
   description:
-    "Professional fire performance and entertainment for festivals, private events, and corporate gatherings",
+    "Fire performance, flow arts teaching and handmade artifacts by Wrenegade. Three thresholds: Flame, Flow and Emporium.",
 };
 
 export default function RootLayout({ children }) {
@@ -18,12 +17,11 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital@0;1&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
-        <Navbar />
         {children}
       </body>
     </html>

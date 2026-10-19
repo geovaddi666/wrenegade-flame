@@ -1,19 +1,9 @@
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Gallery from "@/components/Gallery";
-import Services from "@/components/Services";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Portal from "@/components/portal/Portal";
+
+export const viewport = {
+  themeColor: "#0a0813",
+};
 
 export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <About />
-      <Gallery />
-      <Services />
-      <Contact />
-      <Footer />
-    </main>
-  );
+  return <Portal />;
 }
