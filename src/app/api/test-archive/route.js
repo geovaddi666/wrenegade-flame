@@ -1,7 +1,7 @@
-import { archiveProduct } from '@/lib/productStatus';
+// Disabled: this test route let anyone mark a product as sold.
+// Safe to delete this whole folder (src/app/api/test-archive).
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  await archiveProduct('alchemists-key');
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ error: 'Not found' }, { status: 404 });
 }

@@ -1,10 +1,9 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import ProductDetail from '@/components/emporium/ProductDetail';
-import { products, getProductById } from '@/lib/products';
+import { getProductById } from '@/lib/products';
+import { getProductsWithStatusSafe } from '@/lib/productStatus';
 
-export async function generateStaticParams() {
-  return products.map((p) => ({ id: p.id }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -18,7 +17,12 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { id } = await params;
-  const product = getProductById(id);
+  const allProducts = await getProductsWithStatusSafe();
+  const product = allProducts.find((p) => p.id === id);
   if (!product) notFound();
+
+  // Sold pieces live in the Archive; old links to them land there instead.
+  if (product.archived) redirect(`/emporium/archive/${id}`);
+
   return <ProductDetail product={product} />;
 }

@@ -1,7 +1,7 @@
 import EmporiumHero from '@/components/emporium/EmporiumHero';
 import EmporiumParticles from '@/components/emporium/EmporiumParticles';
 import ProductGrid from '@/components/emporium/ProductGrid';
-import { products } from '@/lib/products';
+import { getProductsWithStatusSafe } from '@/lib/productStatus';
 
 export const metadata = {
   title: 'Emporium Alchymia | Objects of Transmutation',
@@ -9,13 +9,18 @@ export const metadata = {
     'Handmade fire props, leatherwork and sigil objects. Each piece made once, carrying the trace of its making.',
 };
 
-export default function EmporiumPage() {
+// Always read live sold status, so a piece sold through the site leaves the
+// shop (and appears in the Archive) as soon as Stripe confirms the sale.
+export const dynamic = 'force-dynamic';
+
+export default async function EmporiumPage() {
+  const allProducts = await getProductsWithStatusSafe();
   return (
     <main className="emporium-page">
       <EmporiumHero />
       <section className="emporium-lower">
         <EmporiumParticles className="emporium-lower-particles" />
-        <ProductGrid products={products.filter((p) => !p.archived)} />
+        <ProductGrid products={allProducts.filter((p) => !p.archived)} />
       </section>
     </main>
   );

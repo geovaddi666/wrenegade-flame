@@ -13,6 +13,11 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Product not found' }, { status: 404 });
   }
 
+  // Refuse pieces marked sold in products.js, or without a Stripe price
+  if (product.archived || !product.stripePrice) {
+    return NextResponse.json({ error: 'Product no longer available' }, { status: 400 });
+  }
+
   // Check live status from Redis in case it's been archived since page load
   const status = await getProductStatus(productId);
   if (status.archived) {

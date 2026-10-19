@@ -1,10 +1,10 @@
-import { getProductsWithStatus } from '@/lib/productStatus';
+import { getProductsWithStatusSafe } from '@/lib/productStatus';
 import ArchiveDetail from '@/components/emporium/ArchiveDetail';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const allProducts = await getProductsWithStatus();
+  const allProducts = await getProductsWithStatusSafe();
   const product = allProducts.find((p) => p.id === id && p.archived);
   if (!product) return {};
   return {
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ArchiveProductPage({ params }) {
   const { id } = await params;
-  const allProducts = await getProductsWithStatus();
+  const allProducts = await getProductsWithStatusSafe();
   const product = allProducts.find((p) => p.id === id && p.archived);
 
   if (!product) notFound();

@@ -21,6 +21,22 @@ export async function getProductsWithStatus() {
   }));
 }
 
+// Same as getProductsWithStatus, but if Redis can't be reached the pages
+// fall back to the sold flags in products.js instead of crashing.
+export async function getProductsWithStatusSafe() {
+  try {
+    return await getProductsWithStatus();
+  } catch (err) {
+    console.error('Redis unavailable, using static product status:', err);
+    return products.map((product) => ({
+      ...product,
+      archived: product.archived || false,
+      review: null,
+      inStock: !product.archived,
+    }));
+  }
+}
+
 // Mark a product as archived (called by webhook)
 export async function archiveProduct(productId) {
   const existing = await getProductStatus(productId);

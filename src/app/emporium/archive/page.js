@@ -1,4 +1,4 @@
-import { getProductsWithStatus } from '@/lib/productStatus';
+import { getProductsWithStatusSafe } from '@/lib/productStatus';
 import ArchiveGallery from '@/components/emporium/ArchiveGallery';
 
 export const metadata = {
@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function ArchivePage() {
-  const allProducts = await getProductsWithStatus();
+  const allProducts = await getProductsWithStatusSafe();
   const archived = allProducts.filter((p) => p.archived);
 
   return (
