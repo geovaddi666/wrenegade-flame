@@ -1847,3 +1847,66 @@ a.contact-item:hover {
     columns: 1;
   }
 }
+
+/* Product card photo arrows */
+.product-card-media {
+  position: relative;
+}
+.photo-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--em-border-gold);
+  border-radius: 50%;
+  background: rgba(14, 7, 24, 0.62);
+  color: var(--em-gold-bright);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.35s ease, background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.photo-arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.photo-arrow-prev { left: 12px; }
+.photo-arrow-next { right: 12px; }
+.product-card:hover .photo-arrow,
+.photo-arrow:focus-visible {
+  opacity: 1;
+}
+.photo-arrow:hover {
+  background: rgba(74, 54, 105, 0.85);
+  border-color: var(--em-gold);
+}
+.photo-arrow-prev:hover { transform: translateX(-2px); }
+.photo-arrow-next:hover { transform: translateX(2px); }
+.photo-arrow:focus-visible {
+  outline: 2px solid var(--em-gold-bright);
+  outline-offset: 2px;
+}
+/* Touch screens have no hover: keep the arrows visible and a little larger. */
+@media (hover: none) {
+  .photo-arrow {
+    opacity: 1;
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-arrow { transition: none; }
+  .photo-arrow:hover { transform: none; }
+}
