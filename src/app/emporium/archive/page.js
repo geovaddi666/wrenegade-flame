@@ -18,17 +18,11 @@ export default async function ArchivePage() {
       <section className="archive-hero">
         <p className="emporium-eyebrow">Emporium Alchymia</p>
         <h1 className="emporium-hero-title">The Archive</h1>
-        <p className="emporium-hero-subtitle">
-          These artifacts have found their place.
-        </p>
         <div className="emporium-hero-divider">
           <span className="emporium-divider-line" />
           <span className="emporium-divider-glyph">✦</span>
           <span className="emporium-divider-line" />
         </div>
-        <p className="emporium-hero-body">
-          Each piece never to be recreated. Here lies the memory.
-        </p>
       </section>
 
       <section className="emporium-lower">

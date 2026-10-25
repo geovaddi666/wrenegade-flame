@@ -1,16 +1,15 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 
 export default function EmporiumFooter() {
   return (
     <footer className="em-footer">
       <div className="em-container">
-        <Image
-          src="/emporium/emporium-mark.png"
-          alt="Emporium Alchymia"
-          width={54}
-          height={54}
-          className="em-crest-logo em-footer-logo"
+        <img
+          src="/emporium/sigil-rising-flame.png"
+          alt=""
+          aria-hidden="true"
+          className="em-footer-sigil"
         />
         <div className="em-footer-mark">Emporium Alchymia</div>
         <p>

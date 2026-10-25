@@ -1,5 +1,4 @@
 import EmporiumHero from '@/components/emporium/EmporiumHero';
-import EmporiumParticles from '@/components/emporium/EmporiumParticles';
 import ProductGrid from '@/components/emporium/ProductGrid';
 import { getProductsWithStatusSafe } from '@/lib/productStatus';
 
@@ -19,7 +18,6 @@ export default async function EmporiumPage() {
     <main className="emporium-page">
       <EmporiumHero />
       <section className="emporium-lower">
-        <EmporiumParticles className="emporium-lower-particles" />
         <ProductGrid products={allProducts.filter((p) => !p.archived)} />
       </section>
     </main>

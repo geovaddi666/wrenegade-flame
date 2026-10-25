@@ -1104,7 +1104,8 @@ a.contact-item:hover {
 /* Hero */
 .emporium-hero {
   position: relative;
-  min-height: 100vh;
+  /* Compact banner rather than a full screen, so the artifacts show on load. */
+  padding: clamp(48px, 8vh, 96px) 0 clamp(8px, 2vh, 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1210,7 +1211,7 @@ a.contact-item:hover {
 
 /* Grid section */
 .emporium-grid-section {
-  padding: 100px 0 60px;
+  padding: 24px 0 60px;
   background:
     radial-gradient(circle at 22% 22%, rgba(72, 45, 105, 0.28), transparent 56%),
     radial-gradient(circle at 78% 44%, rgba(55, 32, 84, 0.24), transparent 52%),
@@ -1319,7 +1320,6 @@ a.contact-item:hover {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
   gap: 1rem;
 }
 .product-card-name {
@@ -1492,7 +1492,7 @@ a.contact-item:hover {
   position: relative;
 }
 .product-detail-list li::before {
-  content: '✦';
+  content: '\2726';
   position: absolute;
   left: 0;
   color: var(--em-gold);
@@ -1944,4 +1944,187 @@ a.contact-item:hover {
   .nav-portal-link img { transition: filter 0.3s ease; }
   .nav-portal-link:hover img,
   .nav-portal-link:focus-visible img { transform: none; }
+}
+
+/* ==========================================================================
+   EMPORIUM — painted background + sigils
+   Overrides the solid gradients above so the painting shows on every
+   Emporium page. Delete this block to return to the previous look.
+   ========================================================================== */
+
+.emporium-root {
+  position: relative;
+  isolation: isolate;
+  background: var(--em-bg-deep);
+}
+/* The painting, fixed behind everything (desktop by default). */
+.emporium-root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url('/emporium/bg-desktop.webp') center / cover no-repeat;
+  pointer-events: none;
+}
+/* Tall screens (phones, portrait tablets) get the portrait painting. */
+@media (max-aspect-ratio: 1/1) {
+  .emporium-root::before {
+    background-image: url('/emporium/bg-mobile.webp');
+  }
+}
+/* Soft darkening in the centre so photos and text stay readable;
+   the frame stays bright at the edges. */
+.emporium-root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8, 4, 16, 0.45), rgba(8, 4, 16, 0.1) 75%, transparent);
+}
+
+/* Let the painting through the page sections. */
+.emporium-page,
+.emporium-about-page,
+.emporium-hero,
+.emporium-grid-section,
+.product-detail {
+  background: transparent;
+}
+/* Nav — translucent violet glass, gold hairline like the page-break motif */
+.em-nav {
+  background: linear-gradient(180deg, rgba(14, 7, 26, 0.82) 0%, rgba(26, 13, 46, 0.62) 100%);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border-bottom: none;
+  box-shadow: 0 8px 30px rgba(4, 2, 8, 0.35);
+}
+/* Gold line fading at both ends, with the ✦ at its centre */
+.em-nav::after {
+  content: '\2726';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 4%, rgba(201, 168, 76, 0.55) 30%, rgba(201, 168, 76, 0.55) 70%, transparent 96%);
+  color: var(--em-gold);
+  font-size: 0.55rem;
+  line-height: 1px;
+  text-align: center;
+  text-shadow: 0 0 6px rgba(226, 192, 106, 0.8);
+  pointer-events: none;
+}
+.em-nav-inner {
+  padding: 0.45rem 24px;
+}
+.em-nav-back {
+  font-size: 0.86rem;
+  letter-spacing: 0.22em;
+  color: var(--em-gold);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+.em-nav-back:hover,
+.em-nav-back:focus-visible {
+  color: var(--em-gold-bright);
+  text-shadow: 0 0 12px rgba(226, 192, 106, 0.55), 0 0 26px rgba(157, 126, 201, 0.45);
+}
+/* Current section glows, like the title */
+.em-nav-active {
+  color: #efe6f7;
+  text-shadow: 0 0 14px rgba(157, 126, 201, 0.9), 0 0 30px rgba(123, 94, 167, 0.6);
+}
+@media (min-width: 769px) {
+  /* Small ✦ between the links */
+  .em-nav-back + .em-nav-back::before {
+    content: '\2726';
+    display: inline-block;
+    margin-right: 2rem;
+    font-size: 0.5rem;
+    vertical-align: middle;
+    color: rgba(201, 168, 76, 0.6);
+    text-shadow: none;
+  }
+}
+@media (max-width: 768px) {
+  .em-nav-links {
+    background: linear-gradient(180deg, rgba(14, 7, 26, 0.98) 0%, rgba(26, 13, 46, 0.97) 100%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+    box-shadow: 0 14px 30px rgba(4, 2, 8, 0.5);
+  }
+  .em-nav-back {
+    font-size: 1rem;
+  }
+}
+
+.em-footer {
+  background: linear-gradient(180deg, transparent, rgba(4, 2, 8, 0.7));
+}
+
+/* Hero sigil */
+.emporium-hero-sigil {
+  display: block;
+  margin: 0 auto 1.2rem;
+  width: auto;
+  height: clamp(84px, 11vw, 120px);
+  filter: drop-shadow(0 0 10px rgba(226, 192, 106, 0.55)) drop-shadow(0 0 28px rgba(201, 168, 76, 0.3));
+}
+.emporium-hero-subtitle {
+  color: #c3b6d8;
+}
+
+/* Cards: slightly translucent so the painting breathes through */
+.product-card {
+  background: rgba(19, 10, 32, 0.78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-color: var(--em-border-gold);
+  box-shadow: 0 10px 40px rgba(4, 2, 8, 0.5);
+}
+.product-card-subtitle {
+  color: #a99bc0;
+}
+
+/* Side sigils: faint guardians either side of the collection, wide screens only */
+.emporium-side-sigil {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-35%);
+  width: auto;
+  height: min(52vh, 460px);
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+  filter: drop-shadow(0 0 14px rgba(201, 168, 76, 0.4));
+}
+.emporium-side-sigil-left {
+  left: max(12px, calc(50% - 750px));
+}
+.emporium-side-sigil-right {
+  right: max(12px, calc(50% - 750px));
+}
+.emporium-grid-section .emporium-container {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 1400px) {
+  .emporium-side-sigil {
+    display: none;
+  }
+}
+
+/* Footer sign-off */
+.em-footer-sigil {
+  display: block;
+  margin: 0 auto 1.2rem;
+  width: auto;
+  height: 48px;
+  opacity: 0.7;
+}
+
+/* Archive heading: compact now the extra lines are gone */
+.archive-hero {
+  padding: clamp(48px, 8vh, 96px) 24px clamp(16px, 3vh, 32px);
 }

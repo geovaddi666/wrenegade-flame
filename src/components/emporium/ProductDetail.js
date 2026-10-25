@@ -68,24 +68,6 @@ export default function ProductDetail({ product }) {
             )}
           </div>
           <div className="product-detail-info">
-            <p className="product-detail-subtitle">{product.subtitle}</p>
-            <h1 className="product-detail-name">{product.name}</h1>
-            <p className="product-detail-price">{product.priceDisplay}</p>
-            <div className="product-detail-divider" />
-            <div className="product-detail-description">
-              {product.description.split('\n\n').map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-              {product.callToAction && (
-                <p className="product-detail-cta-line">{product.callToAction}</p>
-              )}
-            </div>
-            <div className="product-detail-divider" />
-            <ul className="product-detail-list">
-              {product.details.map((d, i) => (
-                <li key={i}>{d}</li>
-              ))}
-            </ul>
             <button
               className="emporium-buy-button"
               onClick={handleBuy}
@@ -97,6 +79,15 @@ export default function ProductDetail({ product }) {
                 ? 'Acquire this Artifact'
                 : 'This Artifact has found its person'}
             </button>
+            <p className="product-detail-subtitle">{product.subtitle}</p>
+            <h1 className="product-detail-name">{product.name}</h1>
+            <p className="product-detail-price">{product.priceDisplay}</p>
+            <div className="product-detail-divider" />
+            <ul className="product-detail-list">
+              {product.details.map((d, i) => (
+                <li key={i}>{d}</li>
+              ))}
+            </ul>
             <p className="product-detail-note">
               Handmade in Devon. Ships within 3–5 days. Questions?{' '}
               <a href="mailto:flame@wrenegade.co.uk">flame@wrenegade.co.uk</a>

@@ -1,13 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 import ProductCard from './ProductCard';
 
 export default function ProductGrid({ products }) {
   return (
     <section className="emporium-grid-section">
+      <img
+        src="/emporium/sigil-rising-flame.png"
+        alt=""
+        aria-hidden="true"
+        className="emporium-side-sigil emporium-side-sigil-left"
+      />
+      <img
+        src="/emporium/sigil-emotional-depth.png"
+        alt=""
+        aria-hidden="true"
+        className="emporium-side-sigil emporium-side-sigil-right"
+      />
       <div className="emporium-container">
-        <h2 className="emporium-section-title">The Collection</h2>
-        <p className="emporium-section-subtitle">
-          Artifacts of Alchemy; Creative Conjurings
-        </p>
         <div className="product-grid">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />

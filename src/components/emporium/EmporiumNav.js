@@ -3,10 +3,21 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function EmporiumNav() {
   const [isOpen, setIsOpen] = useState(false);
   const close = () => setIsOpen(false);
+  const pathname = usePathname() || '';
+
+  // Which section we're in, so its link can glow.
+  const section = pathname.startsWith('/emporium/about')
+    ? 'about'
+    : pathname.startsWith('/emporium/archive')
+    ? 'archive'
+    : 'emporium';
+  const linkClass = (name) =>
+    section === name ? 'em-nav-back em-nav-active' : 'em-nav-back';
 
   return (
     <nav className="em-nav">
@@ -37,13 +48,16 @@ export default function EmporiumNav() {
         </button>
 
         <div className={isOpen ? 'em-nav-links em-nav-links-open' : 'em-nav-links'}>
-          <Link href="/emporium" className="em-nav-back" onClick={close}>
+          <Link href="/emporium" className={linkClass('emporium')} onClick={close}>
             Emporium
           </Link>
-          <Link href="/emporium/about" className="em-nav-back" onClick={close}>
+          {/* About is hidden from the nav for now; the page still exists at /emporium/about.
+              To bring it back, uncomment this link.
+          <Link href="/emporium/about" className={linkClass('about')} onClick={close}>
             About
           </Link>
-          <Link href="/emporium/archive" className="em-nav-back" onClick={close}>
+          */}
+          <Link href="/emporium/archive" className={linkClass('archive')} onClick={close}>
             Archive
           </Link>
           <Link
