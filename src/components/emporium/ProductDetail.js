@@ -84,7 +84,7 @@ export default function ProductDetail({ product }) {
             <p className="product-detail-price">{product.priceDisplay}</p>
             <div className="product-detail-divider" />
             <ul className="product-detail-list">
-              {product.details.map((d, i) => (
+              {(product.details || []).map((d, i) => (
                 <li key={i}>{d}</li>
               ))}
             </ul>

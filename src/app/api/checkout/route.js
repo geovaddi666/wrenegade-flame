@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { products } from '@/lib/products';
+import { getCatalogItem } from '@/lib/catalog';
 import { getProductStatus } from '@/lib/productStatus';
 import { NextResponse } from 'next/server';
 
@@ -7,14 +7,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const { productId } = await req.json();
-  const product = products.find((p) => p.id === productId);
+  const product = await getCatalogItem(productId);
 
   if (!product) {
     return NextResponse.json({ error: 'Product not found' }, { status: 404 });
   }
 
-  // Refuse pieces marked sold in products.js, or without a Stripe price
-  if (product.archived || !product.stripePrice) {
+  // Refuse pieces already sold, or with nothing to charge
+  const hasPrice = Boolean(product.stripePrice) || product.price > 0;
+  if (product.archived || !hasPrice) {
     return NextResponse.json({ error: 'Product no longer available' }, { status: 400 });
   }
 
@@ -24,17 +25,33 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Product no longer available' }, { status: 400 });
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+  // Older pieces use a price made by hand in Stripe; pieces added through the
+  // admin page are charged their stored price directly.
+  const lineItem = product.stripePrice
+    ? { price: product.stripePrice, quantity: 1 }
+    : {
+        quantity: 1,
+        price_data: {
+          currency: 'gbp',
+          unit_amount: Math.round(product.price * 100),
+          product_data: {
+            name: product.name,
+            ...(product.subtitle ? { description: product.subtitle } : {}),
+            ...(product.images?.[0] && siteUrl
+              ? { images: [new URL(product.images[0], siteUrl).toString()] }
+              : {}),
+          },
+        },
+      };
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
-    line_items: [
-      {
-        price: product.stripePrice,
-        quantity: 1,
-      },
-    ],
+    line_items: [lineItem],
     mode: 'payment',
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/emporium/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/emporium/${product.id}`,
+    success_url: `${siteUrl}/emporium/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${siteUrl}/emporium/${product.id}`,
     metadata: {
       productId: product.id,
     },
