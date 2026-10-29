@@ -1,39 +1,62 @@
-/* Holding page for Wrenegade Flow, in the portal's night-sky palette. */
+/* Wrenegade Flow: moonlit watercolour torii with the Flow sigil.
+   Desktop: the painting holds still behind; the words scroll on the open paper to its left.
+   Phone: the painting crowns the page and fades into paper, the words follow beneath. */
 .page {
-  --void: #0a0813;
-  --ink: #f2ecff;
-  --mist: #8fbcc6;
-  --cyan: #2fd2e8;
+  --paper: #f9f8f4;
+  --ink: #1b2440;
+  --mist: #42536a;
+  --teal: #1d7f8e;
 
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   min-height: 100dvh;
-  display: grid;
-  place-items: center;
-  padding-block: 48px;
-  padding-left: max(20px, env(safe-area-inset-left, 0px));
-  padding-right: max(20px, env(safe-area-inset-right, 0px));
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 38%, rgba(47, 210, 232, 0.12), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 50% 60%, rgba(123, 94, 167, 0.18), transparent 75%),
-    var(--void);
+  display: flex;
+  align-items: center;
+  padding-block: 72px;
+  padding-left: max(24px, 6vw, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+  background: var(--paper);
   color: var(--ink);
   font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
 }
 
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* gate sits around 66% across the painting: keep it in frame as the viewport narrows */
+  background: var(--paper) url('/flow/flow-bg-desktop.webp') 66% 50% / cover no-repeat;
+  pointer-events: none;
+}
+
 .inner {
-  max-width: 34rem;
-  text-align: center;
+  position: relative;
+  isolation: isolate;
+  max-width: min(27rem, 36vw);
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+/* a breath of paper behind the words, so stray ink splatter never crosses them */
+.inner::before {
+  content: '';
+  position: absolute;
+  inset: -3rem -4rem -3rem -3rem;
+  z-index: -1;
+  background: radial-gradient(ellipse at 40% 50%,
+    rgba(249, 248, 244, 0.94) 0%,
+    rgba(249, 248, 244, 0.8) 50%,
+    rgba(249, 248, 244, 0) 74%);
+  pointer-events: none;
 }
 
 .glyph {
-  width: clamp(150px, 40vw, 230px);
+  width: clamp(80px, 7vw, 110px);
   height: auto;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 26px rgba(47, 210, 232, 0.35));
+  filter: drop-shadow(0 0 18px rgba(47, 210, 232, 0.35));
   animation: turn 70s linear infinite;
 }
 @keyframes turn {
@@ -46,46 +69,143 @@
   font-size: 0.85rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--cyan);
-  opacity: 0.85;
+  color: var(--teal);
 }
 
 .title {
   margin: 0;
   font-family: 'Cinzel', Georgia, serif;
   font-weight: 500;
-  font-size: clamp(1.4rem, 4.5vw, 2rem);
-  letter-spacing: 0.08em;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  letter-spacing: 0.06em;
   line-height: 1.3;
   text-wrap: balance;
 }
 
+/* the verse: short stanzas, breathing room between them */
+.verse {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--mist);
+}
+.verse p { margin: 0; }
+.verse p:first-child {
+  font-style: italic;
+  color: var(--ink);
+}
+.fire {
+  margin-top: 0.4rem !important;
+  color: var(--ink);
+}
+.transformation {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.promise {
+  margin: 0.4rem 0 0;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.invite {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: 1.1rem;
+  margin-top: 0.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(29, 127, 142, 0.25);
+}
+
 .body {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.08rem;
   line-height: 1.65;
-  color: color-mix(in srgb, var(--mist) 55%, white);
+  color: var(--mist);
 }
-.body a {
+
+.join {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  background: rgba(29, 127, 142, 0.08);
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--ink);
-  text-decoration-color: rgba(47, 210, 232, 0.6);
-  text-underline-offset: 3px;
+  text-decoration: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.join:hover,
+.join:focus-visible {
+  background: rgba(29, 127, 142, 0.16);
+  box-shadow: 0 0 22px rgba(47, 210, 232, 0.35);
 }
 
 .back {
-  margin-top: 1rem;
+  margin-top: 0.6rem;
   font-family: 'Cinzel', Georgia, serif;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink);
   text-decoration: none;
-  opacity: 0.7;
+  opacity: 0.65;
   transition: opacity 0.3s ease;
 }
 .back:hover,
 .back:focus-visible {
   opacity: 1;
+}
+
+/* Portrait / phone: the tall painting crowns the page, the words follow on the paper. */
+@media (max-aspect-ratio: 4/5), (max-width: 760px) {
+  .page {
+    display: block;
+    padding-top: 74svh;
+    padding-left: max(22px, env(safe-area-inset-left, 0px));
+    padding-right: max(22px, env(safe-area-inset-right, 0px));
+    padding-bottom: max(56px, env(safe-area-inset-bottom, 0px));
+  }
+  .backdrop {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 100svh;
+    /* gate's centre sits at about 37% across the tall painting */
+    background-image: url('/flow/flow-bg-mobile.webp');
+    background-position: 37% 0%;
+  }
+  /* the painting dissolves into paper where the words begin */
+  .backdrop::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    background: linear-gradient(to bottom,
+      rgba(249, 248, 244, 0) 0%,
+      rgba(249, 248, 244, 0.85) 45%,
+      var(--paper) 85%);
+  }
+  .inner {
+    max-width: 30rem;
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+  }
+  .inner::before { display: none; }
+  .glyph { display: none; }
+  .verse { font-size: 1.15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
