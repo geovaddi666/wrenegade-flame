@@ -1,5 +1,6 @@
 import { isAdmin } from '@/lib/adminAuth';
 import { getProductsWithStatus } from '@/lib/productStatus';
+import { getPostageRates, DEFAULT_RATES } from '@/lib/postage';
 import AdminLogin from '@/components/emporium/admin/AdminLogin';
 import AdminDashboard from '@/components/emporium/admin/AdminDashboard';
 
@@ -22,9 +23,10 @@ export default async function AdminPage() {
   // No silent fallback here: if Redis is down, the admin should see an error
   // rather than edit a stale list.
   let products = null;
+  let rates = DEFAULT_RATES;
   let loadError = null;
   try {
-    products = await getProductsWithStatus();
+    [products, rates] = await Promise.all([getProductsWithStatus(), getPostageRates()]);
   } catch (err) {
     if (err?.digest === 'DYNAMIC_SERVER_USAGE') throw err;
     console.error('Admin: could not load products', err);
@@ -33,7 +35,7 @@ export default async function AdminPage() {
 
   return (
     <main className="emporium-page admin-page">
-      <AdminDashboard products={products || []} loadError={loadError} />
+      <AdminDashboard products={products || []} rates={rates} loadError={loadError} />
     </main>
   );
 }

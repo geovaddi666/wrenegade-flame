@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PieceForm from './AddPieceForm';
+import PostageRates from './PostageRates';
+import { POSTAGE_CLASSES, REGIONS, REGION_IDS, postageClassOf } from '@/lib/postageClasses';
 
 async function call(url, options) {
   const res = await fetch(url, options);
@@ -11,7 +13,23 @@ async function call(url, options) {
   return data;
 }
 
-function PieceRow({ piece, onDone }) {
+// One line saying how a shop piece is posted, or a warning if it can't be.
+function postageSummary(piece, rates) {
+  const cls = postageClassOf(piece);
+  if (!cls) return { text: 'Postage not set — buyers will be asked to get in touch', warn: true };
+  const label = POSTAGE_CLASSES.find((c) => c.id === cls).label;
+  const parts = REGION_IDS.map((r) => {
+    const amount = rates?.[cls]?.[r];
+    return `${REGIONS[r].label} ${typeof amount === 'number' ? `£${amount.toFixed(2)}` : '—'}`;
+  });
+  const none = REGION_IDS.every((r) => typeof rates?.[cls]?.[r] !== 'number');
+  return {
+    text: none ? `${label}: no postage prices set yet` : `${label} · ${parts.join(' · ')}`,
+    warn: none,
+  };
+}
+
+function PieceRow({ piece, rates, onDone }) {
   const [editing, setEditing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [confirming, setConfirming] = useState(false);
@@ -76,6 +94,10 @@ function PieceRow({ piece, onDone }) {
           {/* Archived pieces don't show a price. */}
           {[piece.subtitle, piece.archived ? null : piece.priceDisplay].filter(Boolean).join(' · ')}
         </p>
+        {!piece.archived && (() => {
+          const p = postageSummary(piece, rates);
+          return <p className={p.warn ? 'admin-row-postage admin-row-postage-warn' : 'admin-row-postage'}>{p.text}</p>;
+        })()}
         {error && <p className="admin-error">{error}</p>}
       </div>
       <div className="admin-row-actions">
@@ -106,7 +128,7 @@ function PieceRow({ piece, onDone }) {
   );
 }
 
-export default function AdminDashboard({ products, loadError }) {
+export default function AdminDashboard({ products, rates, loadError }) {
   const router = useRouter();
   const [adding, setAdding] = useState(false);
   const refresh = () => router.refresh();
@@ -148,10 +170,12 @@ export default function AdminDashboard({ products, loadError }) {
           <p className="admin-empty">Nothing in the shop right now.</p>
         ) : (
           <ul className="admin-list">
-            {inShop.map((p) => <PieceRow key={p.id} piece={p} onDone={refresh} />)}
+            {inShop.map((p) => <PieceRow key={p.id} piece={p} rates={rates} onDone={refresh} />)}
           </ul>
         )}
       </section>
+
+      <PostageRates rates={rates} onSaved={refresh} />
 
       <section className="admin-section">
         <h2 className="admin-section-title">In the archive <span>{archived.length}</span></h2>
@@ -159,7 +183,7 @@ export default function AdminDashboard({ products, loadError }) {
           <p className="admin-empty">The archive is empty.</p>
         ) : (
           <ul className="admin-list">
-            {archived.map((p) => <PieceRow key={p.id} piece={p} onDone={refresh} />)}
+            {archived.map((p) => <PieceRow key={p.id} piece={p} rates={rates} onDone={refresh} />)}
           </ul>
         )}
       </section>

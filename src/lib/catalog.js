@@ -48,7 +48,7 @@ function slugify(text) {
 }
 
 // Add a new piece to the front of the shop. Returns the saved piece.
-export async function addCatalogItem({ name, subtitle, price, details, images }) {
+export async function addCatalogItem({ name, subtitle, price, details, images, postage }) {
   const catalog = await getCatalog();
 
   const base = slugify(name);
@@ -66,6 +66,7 @@ export async function addCatalogItem({ name, subtitle, price, details, images })
     shortDescription: '',
     description: '',
     details,
+    postage,
     category: '',
     inStock: true,
     archived: false,
@@ -78,12 +79,13 @@ export async function addCatalogItem({ name, subtitle, price, details, images })
 
 // Change a piece's details. The id (and so its web address) never changes.
 // Returns { before, after }, or null if the piece doesn't exist.
-export async function updateCatalogItem(id, { name, subtitle, price, details, images }) {
+export async function updateCatalogItem(id, { name, subtitle, price, details, images, postage }) {
   const catalog = await getCatalog();
   const before = catalog.find((p) => p.id === id);
   if (!before) return null;
 
   const after = { ...before, name, subtitle, details, images, updatedAt: new Date().toISOString() };
+  if (postage !== undefined) after.postage = postage;
   if (price !== undefined && price !== before.price) {
     after.price = price;
     after.priceDisplay = formatPrice(price);

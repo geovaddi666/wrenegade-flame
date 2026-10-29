@@ -4,27 +4,37 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ProductDetail({ product }) {
+const formatPostage = (amount) => (amount === 0 ? 'Free' : `£${amount.toFixed(2)}`);
+
+export default function ProductDetail({ product, shipping = [] }) {
   const [activeImage, setActiveImage] = useState(0);
   const [purchasing, setPurchasing] = useState(false);
+  const [error, setError] = useState('');
+  // Where it's being posted. With only one option, it's chosen already.
+  const [region, setRegion] = useState(shipping.length === 1 ? shipping[0].region : null);
+
+  const canPost = shipping.length > 0;
+  const chosen = shipping.find((s) => s.region === region);
 
   const handleBuy = async () => {
+    if (!chosen) return;
     setPurchasing(true);
+    setError('');
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: product.id }),
+        body: JSON.stringify({ productId: product.id, region }),
       });
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert('Something went wrong. Please try again.');
+        setError(data.error || 'Something went wrong. Please try again.');
         setPurchasing(false);
       }
     } catch {
-      alert('Something went wrong. Please try again.');
+      setError('Something went wrong. Please try again.');
       setPurchasing(false);
     }
   };
@@ -68,17 +78,47 @@ export default function ProductDetail({ product }) {
             )}
           </div>
           <div className="product-detail-info">
-            <button
-              className="emporium-buy-button"
-              onClick={handleBuy}
-              disabled={purchasing || !product.inStock}
-            >
-              {purchasing
-                ? 'Opening the portal...'
-                : product.inStock
-                ? 'Acquire this Artifact'
-                : 'This Artifact has found its person'}
-            </button>
+            {product.inStock && canPost && (
+              <div className="postage-choice" role="radiogroup" aria-label="Deliver to">
+                <span className="postage-choice-label">Deliver to</span>
+                <div className="postage-choice-options">
+                  {shipping.map((s) => (
+                    <button
+                      key={s.region}
+                      type="button"
+                      role="radio"
+                      aria-checked={region === s.region}
+                      className={region === s.region ? 'postage-option postage-option-active' : 'postage-option'}
+                      onClick={() => setRegion(s.region)}
+                      disabled={purchasing}
+                    >
+                      <span>{s.label}</span>
+                      <span className="postage-option-price">+ {formatPostage(s.amount)}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {product.inStock && !canPost ? (
+              <a className="emporium-buy-button emporium-contact-button" href={`mailto:flame@wrenegade.co.uk?subject=${encodeURIComponent(product.name)}`}>
+                Get in touch to acquire
+              </a>
+            ) : (
+              <button
+                className="emporium-buy-button"
+                onClick={handleBuy}
+                disabled={purchasing || !product.inStock || !chosen}
+              >
+                {purchasing
+                  ? 'Opening the portal...'
+                  : !product.inStock
+                  ? 'This Artifact has found its person'
+                  : chosen
+                  ? 'Acquire this Artifact'
+                  : 'Choose where it’s going'}
+              </button>
+            )}
+            {error && <p className="product-detail-error" role="alert">{error}</p>}
             <p className="product-detail-subtitle">{product.subtitle}</p>
             <h1 className="product-detail-name">{product.name}</h1>
             <p className="product-detail-price">{product.priceDisplay}</p>
@@ -89,7 +129,8 @@ export default function ProductDetail({ product }) {
               ))}
             </ul>
             <p className="product-detail-note">
-              Handmade in Devon. Ships within 3–5 days. Questions?{' '}
+              Handmade in Devon. Ships within 3–5 days. Posting outside the UK and
+              Europe, or questions?{' '}
               <a href="mailto:flame@wrenegade.co.uk">flame@wrenegade.co.uk</a>
             </p>
           </div>

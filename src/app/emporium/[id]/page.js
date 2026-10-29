@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import ProductDetail from '@/components/emporium/ProductDetail';
 import { getProductsWithStatusSafe } from '@/lib/productStatus';
+import { getPostageRatesSafe, shippingOptionsFor } from '@/lib/postage';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,5 +25,6 @@ export default async function ProductPage({ params }) {
   // Sold pieces live in the Archive; old links to them land there instead.
   if (product.archived) redirect(`/emporium/archive/${id}`);
 
-  return <ProductDetail product={product} />;
+  const shipping = shippingOptionsFor(product, await getPostageRatesSafe());
+  return <ProductDetail product={product} shipping={shipping} />;
 }

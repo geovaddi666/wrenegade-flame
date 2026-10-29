@@ -2436,3 +2436,120 @@ a.contact-item:hover {
 .admin-row-editing {
   list-style: none;
 }
+
+/* Product page: where it's being posted */
+.postage-choice {
+  margin-bottom: 1rem;
+}
+.postage-choice-label {
+  display: block;
+  font-family: var(--heading-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--em-gold);
+  margin-bottom: 0.5rem;
+}
+.postage-choice-options {
+  display: flex;
+  gap: 0.6rem;
+}
+.postage-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--heading-font);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--em-text);
+  background: rgba(19, 10, 32, 0.7);
+  border: 1px solid var(--em-border-gold);
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.postage-option:hover:not(:disabled) {
+  border-color: var(--em-gold);
+}
+.postage-option-active {
+  border-color: var(--em-gold);
+  background: rgba(45, 16, 84, 0.75);
+  box-shadow: 0 0 16px rgba(201, 168, 76, 0.35);
+}
+.postage-option-price {
+  font-family: var(--body-font);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1rem;
+  color: var(--em-gold-bright);
+}
+.emporium-contact-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.product-detail-error {
+  color: #f0b3a8;
+  font-size: 1.05rem;
+  margin: -0.4rem 0 1rem;
+}
+
+/* Admin: postage */
+.admin-row-postage {
+  font-size: 0.95rem;
+  color: var(--em-text-muted);
+}
+.admin-row-postage-warn {
+  color: #e8b86a;
+}
+.admin-collapse {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.admin-hint {
+  color: var(--em-text-muted);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.admin-rates {
+  width: 100%;
+  border-collapse: collapse;
+}
+.admin-rates th,
+.admin-rates td {
+  padding: 0.4rem 0.4rem;
+  text-align: left;
+  vertical-align: middle;
+}
+.admin-rates thead th {
+  font-family: var(--heading-font);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--em-gold);
+}
+.admin-rates tbody th {
+  font-weight: normal;
+  color: var(--em-text);
+  font-size: 1.05rem;
+}
+.admin-rates .admin-input {
+  min-width: 0;
+  width: 100%;
+}
+@media (max-width: 560px) {
+  .admin-rates tbody th {
+    font-size: 0.95rem;
+  }
+}

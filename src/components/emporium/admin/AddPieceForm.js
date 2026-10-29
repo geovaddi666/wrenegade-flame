@@ -4,6 +4,7 @@
 // (pass `piece` to edit).
 
 import { useEffect, useRef, useState } from 'react';
+import { POSTAGE_CLASSES } from '@/lib/postageClasses';
 
 const MAX_EDGE = 1800; // longest side of an uploaded photo, in pixels
 const MAX_PHOTOS = 12;
@@ -56,6 +57,9 @@ export default function PieceForm({ piece, archived = false, onCancel, onSaved }
   const [subtitle, setSubtitle] = useState(piece?.subtitle || '');
   const [price, setPrice] = useState(piece?.price ? String(piece.price) : '');
   const [details, setDetails] = useState((piece?.details || []).join('\n'));
+  const [postage, setPostage] = useState(
+    piece?.postage || (piece?.category === 'leather' ? 'leather' : '')
+  );
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -116,7 +120,10 @@ export default function PieceForm({ piece, archived = false, onCancel, onSaved }
 
       setStatus(editing ? 'Saving changes…' : 'Placing it in the shop…');
       const payload = { name, subtitle, details: details.split('\n'), images: urls };
-      if (!archived) payload.price = price;
+      if (!archived) {
+        payload.price = price;
+        payload.postage = postage;
+      }
 
       const res = await fetch(editing ? `/api/admin/products/${piece.id}` : '/api/admin/products', {
         method: editing ? 'PATCH' : 'POST',
@@ -189,6 +196,19 @@ export default function PieceForm({ piece, archived = false, onCancel, onSaved }
             <input className="admin-input" type="number" inputMode="decimal" min="1" step="0.01"
               value={price} onChange={(e) => setPrice(e.target.value)} placeholder="250" required disabled={busy} />
           </span>
+        </label>
+      )}
+
+      {!archived && (
+        <label className="admin-field">
+          <span className="admin-label">Postage</span>
+          <select className="admin-input" value={postage} onChange={(e) => setPostage(e.target.value)}
+            required disabled={busy}>
+            <option value="" disabled>Choose…</option>
+            {POSTAGE_CLASSES.map((c) => (
+              <option key={c.id} value={c.id}>{c.label}</option>
+            ))}
+          </select>
         </label>
       )}
 

@@ -1,5 +1,6 @@
 // Shared checks for the add and edit forms' data.
 import { keyFromUrl } from './imageStore';
+import { isPostageClass } from './postage';
 
 const clean = (value, max) =>
   typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, max) : '';
@@ -32,6 +33,9 @@ export function parsePieceInput(body, { allowedImages = [], requirePrice = true 
       return { error: 'Enter a price of at least £1.' };
     }
     value.price = price;
+    // Pieces for sale need a postage class (archived pieces don't).
+    if (!isPostageClass(body.postage)) return { error: 'Choose how the piece is posted.' };
+    value.postage = body.postage;
   }
 
   return { value };
