@@ -53,14 +53,32 @@
   pointer-events: none;
 }
 
-.glyph {
-  width: clamp(80px, 7vw, 110px);
-  height: auto;
-  filter: drop-shadow(0 0 18px rgba(47, 210, 232, 0.35));
-  animation: turn 70s linear infinite;
+/* the portal icon: the way home, at the top on desktop and the foot on phones */
+.portalLink {
+  display: block;
+  border-radius: 50%;
+  line-height: 0;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 14px rgba(47, 210, 232, 0.3));
 }
-@keyframes turn {
-  to { transform: rotate(360deg); }
+.portalLink img {
+  width: 100%;
+  height: auto;
+}
+.portalLink:hover,
+.portalLink:focus-visible {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 24px rgba(47, 210, 232, 0.55));
+}
+.portalLink:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+.portalTop {
+  width: clamp(64px, 5.5vw, 84px);
+}
+.portalBottom {
+  display: none;
 }
 
 .eyebrow {
@@ -153,22 +171,6 @@
   box-shadow: 0 0 22px rgba(47, 210, 232, 0.35);
 }
 
-.back {
-  margin-top: 0.6rem;
-  font-family: 'Cinzel', Georgia, serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-decoration: none;
-  opacity: 0.65;
-  transition: opacity 0.3s ease;
-}
-.back:hover,
-.back:focus-visible {
-  opacity: 1;
-}
-
 /* Portrait / phone: the tall painting crowns the page, the words follow on the paper. */
 @media (max-aspect-ratio: 4/5), (max-width: 760px) {
   .page {
@@ -204,10 +206,17 @@
     align-items: center;
   }
   .inner::before { display: none; }
-  .glyph { display: none; }
+  .portalTop { display: none; }
+  .portalBottom {
+    display: block;
+    width: 68px;
+    margin-top: 1.4rem;
+  }
   .verse { font-size: 1.15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .glyph { animation: none; }
+  .portalLink { transition: none; }
+  .portalLink:hover,
+  .portalLink:focus-visible { transform: none; }
 }

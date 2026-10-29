@@ -21,14 +21,16 @@ export default function FlowPage() {
       <div className={styles.backdrop} aria-hidden="true" />
 
       <div className={styles.inner}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className={styles.glyph}
-          src="/portal/flow.webp"
-          alt=""
-          width={760}
-          height={760}
-        />
+        {/* Desktop: the portal crowns the column. On phones it moves to the foot. */}
+        <Link
+          href="/"
+          className={`${styles.portalLink} ${styles.portalTop}`}
+          aria-label="Return to the portal"
+          title="Return to the portal"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/portal/portal-icon.webp" alt="" width={192} height={192} />
+        </Link>
         <p className={styles.eyebrow}>Wrenegade Flow</p>
         <h1 className={styles.title}>
           Fire Spinning as a Ritual Tool of Transmutation
@@ -79,8 +81,14 @@ export default function FlowPage() {
           )}
         </div>
 
-        <Link href="/" className={styles.back}>
-          &larr; Return to the portal
+        <Link
+          href="/"
+          className={`${styles.portalLink} ${styles.portalBottom}`}
+          aria-label="Return to the portal"
+          title="Return to the portal"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/portal/portal-icon.webp" alt="" width={192} height={192} />
         </Link>
       </div>
     </main>
