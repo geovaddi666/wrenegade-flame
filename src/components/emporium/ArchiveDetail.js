@@ -57,22 +57,7 @@ export default function ArchiveDetail({ product }) {
 
             <div className="product-detail-divider" />
 
-            {/* Pieces added through the admin page have no written story. */}
-            {(product.description || product.callToAction) && (
-              <>
-                <div className="product-detail-description">
-                  {(product.description || '').split('\n\n').filter(Boolean).map((para, i) => (
-                    <p key={i}>{para}</p>
-                  ))}
-                  {product.callToAction && (
-                    <p className="product-detail-cta-line">{product.callToAction}</p>
-                  )}
-                </div>
-
-                <div className="product-detail-divider" />
-              </>
-            )}
-
+            {/* Archived pieces keep their mystery: no story, just what they are. */}
             <ul className="product-detail-list">
               {(product.details || []).map((d, i) => (
                 <li key={i}>{d}</li>

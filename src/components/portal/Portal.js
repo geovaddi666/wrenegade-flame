@@ -96,8 +96,6 @@ export default function Portal() {
     setTimeout(() => router.push(door.href), 650);
   };
 
-  const enteringDoor = DOORS.find((d) => d.key === entering);
-
   return (
     <main className={`${styles.stage} ${entering ? styles.leaving : ''}`}>
       {DOORS.map((door, i) => (
@@ -123,13 +121,6 @@ export default function Portal() {
 
       <div className={styles.welcome}>
         <h1 className={styles.welcomeTitle}>Welcome to the portal</h1>
-        <p className={styles.hint}>
-          {enteringDoor ? (
-            <>entering <b>{enteringDoor.name}</b></>
-          ) : (
-            <>three thresholds &mdash; <b>Flame</b> &middot; <b>Flow</b> &middot; <b>Emporium</b></>
-          )}
-        </p>
       </div>
 
       {EMBERS.map((m) => (
