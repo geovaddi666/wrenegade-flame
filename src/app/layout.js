@@ -1,6 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
+  metadataBase: new URL("https://wrenegade.co.uk"),
   title: "Wrenegade | Flame · Flow · Emporium",
   description:
     "Fire performance, flow arts teaching and handmade artifacts by Wrenegade. Three thresholds: Flame, Flow and Emporium.",

@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import FlameSigil from './FlameSigil';
 
 const NAV_LINKS = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'gallery', label: 'Gallery' },
   { id: 'services', label: 'Services' },
+  { id: 'gallery', label: 'Gallery' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -63,6 +64,7 @@ export default function Navbar() {
           className="navbar-logo"
           onClick={(e) => isHomePage && handleLinkClick(e, 'home')}
         >
+          <FlameSigil />
           Wrenegade Flame
         </a>
 

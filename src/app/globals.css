@@ -237,10 +237,12 @@ body {
 .hero-title {
     font-family: var(--heading-font);
     font-weight: 800;
-    font-size: clamp(2rem, 7vw, 6.5rem);
+    /* Floor is low enough that the longest word fits a 320px-wide phone */
+    font-size: clamp(1.35rem, 7vw, 6.5rem);
     line-height: 1.05;
     margin-bottom: 1.5rem;
     letter-spacing: 0.06em;
+    overflow-wrap: break-word;
     text-transform: uppercase;
     color: #f5ede4;
     text-shadow:
@@ -852,6 +854,8 @@ a.contact-item:hover {
 
 @media (max-width: 480px) {
     .gallery-grid { column-count: 1; }
+    .hero { padding-left: 16px; padding-right: 16px; }
+    .hero-title { letter-spacing: 0.03em; }
 }
 
 @media (max-width: 380px) {
@@ -2552,4 +2556,297 @@ a.contact-item:hover {
   .admin-rates tbody th {
     font-size: 0.95rem;
   }
+}
+
+
+/* ==========================================================================
+   FLAME — watercolour background, photo hero, rising-flame sigil
+   ========================================================================== */
+
+/* Fixed night scene behind the whole Flame page */
+.flame-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--dark-bg) url('/flame/bg-desktop.webp') center bottom / cover no-repeat;
+    pointer-events: none;
+}
+
+/* Scrim: keeps text readable where the firelight is brightest */
+.flame-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(10, 7, 8, 0.10) 0%,
+        rgba(10, 7, 8, 0.35) 55%,
+        rgba(10, 7, 8, 0.62) 100%);
+}
+
+@media (max-aspect-ratio: 4/5) {
+    .flame-bg { background-image: url('/flame/bg-mobile.webp'); }
+}
+
+/* Let the painting show through the sections */
+.flame-page .about,
+.flame-page .gallery,
+.flame-page .services,
+.flame-page .contact {
+    background: transparent;
+}
+
+.flame-page .footer {
+    background: rgba(5, 3, 4, 0.78);
+}
+
+.flame-page .service-card {
+    background: rgba(16, 11, 12, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Sigil: masked shape painted in ember gold, glow on the wrapper */
+.flame-sigil {
+    display: block;
+    width: var(--sigil-w, 40px);
+    filter: drop-shadow(0 0 8px rgba(226, 89, 43, 0.5));
+}
+
+.flame-sigil-mark {
+    display: block;
+    aspect-ratio: 465 / 720;
+    background: linear-gradient(to top, #a8331c 0%, #e2592b 40%, #f0a02a 78%, #ffd27a 100%);
+    -webkit-mask: url('/flame/sigil.png') center / contain no-repeat;
+    mask: url('/flame/sigil.png') center / contain no-repeat;
+}
+
+.flame-hero-sigil {
+    --sigil-w: clamp(44px, 5vw, 64px);
+    margin: 0 auto 1.4rem;
+    animation: sigil-breathe 5s ease-in-out infinite;
+}
+
+@keyframes sigil-breathe {
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(226, 89, 43, 0.45)); }
+    50% { filter: drop-shadow(0 0 20px rgba(240, 160, 42, 0.8)); }
+}
+
+.navbar-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.navbar-logo .flame-sigil {
+    --sigil-w: 18px;
+    filter: drop-shadow(0 0 5px rgba(226, 89, 43, 0.55));
+}
+
+/* Section divider: sigil between two fading ember lines */
+.flame-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    padding: 0 20px;
+}
+
+.flame-divider::before,
+.flame-divider::after {
+    content: '';
+    height: 1px;
+    width: clamp(40px, 14vw, 160px);
+    background: linear-gradient(90deg, transparent, rgba(226, 89, 43, 0.6), transparent);
+}
+
+.flame-divider .flame-sigil {
+    --sigil-w: 24px;
+    opacity: 0.8;
+}
+
+/* Hero: photo as taken, edges melting into the painting */
+.flame-hero {
+    min-height: auto;
+    padding-top: 110px;
+    padding-bottom: 40px;
+}
+
+.flame-hero::before {
+    z-index: 0;
+}
+
+.flame-hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flame-hero-photo {
+    position: relative;
+    width: calc(100% - 24px);
+    max-width: 640px;
+    aspect-ratio: 1080 / 1150;
+    margin-top: 1.4rem;
+}
+
+@media (min-width: 900px) {
+    .flame-hero {
+        min-height: 100vh;
+        padding-bottom: 60px;
+    }
+
+    .flame-hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .flame-hero-photo {
+        width: 100%;
+        margin-top: 0;
+        max-height: 82vh;
+        justify-self: center;
+    }
+
+    /* Title shares the row with the photo, so it scales to its column */
+    .flame-hero .hero-title {
+        font-size: clamp(1.8rem, 3.3vw, 3.2rem);
+    }
+}
+
+.flame-page .services {
+    padding-bottom: 70px;
+}
+
+/* Beyond the Flame: sub-group under Performances */
+.beyond {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.beyond-title {
+    font-family: var(--heading-font);
+    font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.beyond-intro {
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    max-width: 640px;
+    margin: 0 auto 2.2rem;
+}
+
+.services-grid-single {
+    grid-template-columns: minmax(0, 560px);
+    justify-content: center;
+}
+
+/* Any Music. Any Mood. — full-width band */
+.flame-versatility {
+    padding: 90px 20px 100px;
+    text-align: center;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(5, 3, 4, 0.62) 18%,
+        rgba(5, 3, 4, 0.62) 82%,
+        transparent 100%);
+}
+
+.flame-versatility .flame-sigil {
+    --sigil-w: 34px;
+    margin: 0 auto 1.4rem;
+}
+
+.versatility-title {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f5ede4;
+    margin-bottom: 1.6rem;
+    text-shadow: 0 0 30px rgba(226, 89, 43, 0.45);
+}
+
+.versatility-title span {
+    display: inline-block;   /* break between the two phrases, never inside one */
+}
+
+.flame-versatility p {
+    max-width: 720px;
+    margin: 0 auto 1.2rem;
+    font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+    line-height: 1.8;
+}
+
+.flame-versatility .versatility-video {
+    font-family: var(--heading-font);
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    letter-spacing: 0.08em;
+    color: var(--text-color);
+    margin: 1.8rem auto 1.8rem;
+}
+
+.flame-versatility .versatility-statement {
+    font-style: italic;
+    color: var(--ember-bright);
+}
+
+/* Photo frame: ember line, black band, fine gold line (hero + about) */
+.flame-frame {
+    padding: 10px;
+    background: #060405;
+    border: 1px solid rgba(226, 89, 43, 0.5);
+    box-shadow:
+        0 0 0 5px #060405,
+        0 0 0 6px rgba(240, 160, 42, 0.28),
+        0 0 46px rgba(226, 89, 43, 0.28);
+}
+
+.flame-frame-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 1px solid rgba(240, 160, 42, 0.3);
+}
+
+.flame-frame img {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 899px) {
+    .flame-frame { padding: 7px; }
+}
+
+/* Section titles on small phones: keep long words on screen */
+@media (max-width: 480px) {
+    .flame-page .section-title {
+        font-size: clamp(1.4rem, 7.5vw, 2.2rem);
+        letter-spacing: 0.08em;
+        gap: 0.8rem;
+    }
+
+    .flame-page .section-title::before,
+    .flame-page .section-title::after {
+        width: 22px;
+        flex-shrink: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flame-hero-sigil { animation: none; }
 }

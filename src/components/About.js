@@ -17,14 +17,17 @@ export default function About() {
               flame, and the moment. No two shows are ever the same.
             </p>
           </div>
-          <div className="about-image">
+          {/* Frame matches this photo's near-square shape so both flames stay in view */}
+          <div className="about-image flame-frame" style={{ aspectRatio: '816 / 878' }}>
+            <div className="flame-frame-photo">
             <Image
-              src="/gallery/Ostara_1_52_2.jpg"
-              alt="Fire Performer Portrait"
+              src="/gallery/PXL_20260919_212102814.jpg"
+              alt="Wrenegade spinning a fire staff in leathers, with painted sigils across his chest"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
             />
+            </div>
           </div>
         </div>
       </div>
